@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 
 /*
- * ****  Postgresql data source  configurations ********
+ * *****  Postgresql data source  configurations *****
  *
  * */
 @Configuration
@@ -38,7 +38,7 @@ public class PostgresqlDataSourceConfig {
      * */
     @Bean
     @ConfigurationProperties(prefix="postgresql.datasource")
-    public DataSource db1DataSource() {
+    public DataSource postgresqlDataSource() {
         return DataSourceBuilder.create().build();
     }
 
@@ -51,14 +51,14 @@ public class PostgresqlDataSourceConfig {
      *
      * */
     @Bean
-    public LocalContainerEntityManagerFactoryBean db1EntityManagerFactory(
+    public LocalContainerEntityManagerFactoryBean postgresqlEntityManagerFactory(
             EntityManagerFactoryBuilder builder
             ) {
         HashMap<String , Object> properties=new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         return  builder
-                .dataSource(db1DataSource())
+                .dataSource(postgresqlDataSource())
                 .packages("com.ioffice.DataMigrationAPI.model")
                 .properties(properties)
                 .build();
@@ -72,7 +72,7 @@ public class PostgresqlDataSourceConfig {
      *
      * */
     @Bean
-    public PlatformTransactionManager db1TransactionManager(
+    public PlatformTransactionManager postgresqlTransactionManager(
             @Qualifier("postgresqlEntityManagerFactory")
             EntityManagerFactory entityManagerFactory
             ) {
