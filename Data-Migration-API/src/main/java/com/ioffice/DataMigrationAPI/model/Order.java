@@ -13,12 +13,12 @@ import lombok.*;
 @ToString
 public class Order {
     @Id
-    @Column
+    @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-    @Column
+    @Column(name = "t_shirt_size")
     private String tShirtSize;
-    @Column
+    @Column(name = "address")
     private String address;
     @OneToOne
     @JoinColumn(name=" userId")

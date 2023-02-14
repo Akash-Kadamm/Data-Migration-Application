@@ -17,18 +17,19 @@ public class User {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
-    @Column
+    @Column(name = "user_name")
     private String userName;
-    @Column
+    @Column(name="user_email")
     private String userEmail;
-    @Column
+    @Column(name = "user_password")
     private String userPassword;
-    @Column
+    @Column(name = "user_company_name")
     private String userCompanyName;
     @OneToOne
     @JoinColumn(name=" departmentId")
     private Department department;
 
-
+    @Column(name = "is_migrate")
+    private boolean isMigrate;
 
 }

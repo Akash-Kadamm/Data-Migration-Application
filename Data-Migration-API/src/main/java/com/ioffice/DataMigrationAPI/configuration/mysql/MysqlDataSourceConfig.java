@@ -39,7 +39,7 @@ public class MysqlDataSourceConfig {
     @Primary
     @Bean
     @ConfigurationProperties(prefix="mysql.datasource")
-    public DataSource db2DataSource() {
+    public DataSource mysqlDataSource() {
         return DataSourceBuilder.create().build();
     }
 
@@ -53,14 +53,14 @@ public class MysqlDataSourceConfig {
      * */
     @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean db2EntityManagerFactory(
+    public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(
             EntityManagerFactoryBuilder builder
              ) {
         HashMap<String , Object> properties=new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         return  builder
-                .dataSource(db2DataSource())
+                .dataSource(mysqlDataSource())
                 .packages("com.ioffice.DataMigrationAPI.model")
                 .properties(properties)
                 .build();
@@ -76,7 +76,7 @@ public class MysqlDataSourceConfig {
      * */
     @Primary
     @Bean
-    public PlatformTransactionManager db2TransactionManager(
+    public PlatformTransactionManager mysqlTransactionManager(
             @Qualifier("mysqlEntityManagerFactory")
             EntityManagerFactory entityManagerFactory
             ) {

@@ -13,12 +13,12 @@ import lombok.*;
 @ToString
 public class Department {
     @Id
-    @Column
+    @Column(name = "department_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int departmentId;
-    @Column
+    @Column(name = "department_name")
     private String departmentName;
-    @Column
+    @Column(name = "designation")
     private String designation;
 
 
